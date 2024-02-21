@@ -1,0 +1,29 @@
+import random
+import time
+
+# Simulated GPS coordinates range
+COORDINATE_MIN = -90
+COORDINATE_MAX = 90
+
+# Simulated phone number
+USER_PHONE_NUMBER = "+1234567890"
+
+def generate_random_coordinates():
+    latitude = round(random.uniform(COORDINATE_MIN, COORDINATE_MAX), 6)
+    longitude = round(random.uniform(COORDINATE_MIN, COORDINATE_MAX), 6)
+    return latitude, longitude
+
+def send_notification(latitude, longitude):
+    message = f"Your baggage is located at Latitude: {latitude}, Longitude: {longitude}"
+    print("Sending notification to user:", message)
+    # Here you can integrate with a service like Twilio to send SMS notifications
+    # Example: twilio_client.messages.create(body=message, from_="+1234567890", to=USER_PHONE_NUMBER)
+
+def track_baggage():
+    while True:
+        latitude, longitude = generate_random_coordinates()
+        send_notification(latitude, longitude)
+        time.sleep(10)  # Simulating periodic updates every 10 seconds
+
+if __name__ == "__main__":
+    track_baggage()
